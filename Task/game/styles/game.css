@@ -3,6 +3,12 @@
     height: 24px;
     background-color: #000;
 }
+
+.figure-ellipse {
+    background-color: mistyrose;
+    border-radius: 50%;
+    border: 1px solid darkorchid;
+}
 .figure-circle {
     background-color: rgba(255, 206, 146, 0.69);
     border-radius: 50%;

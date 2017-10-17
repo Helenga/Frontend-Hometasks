@@ -14,19 +14,27 @@ var Game = function Game(max_figures) {
 
 Game.FIELD = null;
 
-
 /**
  * @description Тут может быть любая логика инициализации игры
  */
 Game.prototype.initialize = function () {
-    if (FiguresGroup) {
-        this.figuresGroup = new FiguresGroup(this.MAX_FIGURES_NUMBER);
-    }
+
+    this.figuresGroup = new FiguresGroup(this.MAX_FIGURES_NUMBER);
+
     this.figuresCounterElement = document.querySelector('.fields__elements-count');
 
     Game.FIELD = document.querySelector('.field');
 
     this._inited = true;
+};
+
+Game.prototype.newFigure = function () {
+    that = this;
+    return function () {
+        var figure = that.figuresGroup.generateRandomFigure();
+        that.figuresGroup.addFigure(figure);
+        that.figuresCounterElement.innerHTML = that.figuresGroup.getNumberOfFigures();
+    }
 };
 
 /**
@@ -43,11 +51,14 @@ Game.prototype.run = function () {
         backdrop.style.visibility = 'hidden';
     }
 
+    /* var field = document.querySelector('.field');*/
+    Game.FIELD.addEventListener('click', this.newFigure());
+
     /* Каждые 1000/40 миллисекунд (40 FPS) вызываем перерисовку фигур с изменившимися координатами */
     var _this = this;
     this.interval = setInterval(function () {
         _this.nextFrame();
-    }, 1000 / 40);
+    }, 1000/40);
 };
 
 /**
