@@ -5,9 +5,6 @@
  * @param velocity - Скорость
  * @constructor
  */
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 var Figure = function Figure(width, height, velocity) {
     width = width || 24;
